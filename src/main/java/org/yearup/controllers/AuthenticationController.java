@@ -26,7 +26,7 @@ import org.yearup.security.jwt.TokenProvider;
 @RestController
 @CrossOrigin
 @PreAuthorize("permitAll()")
-public class AuthenticationController {
+public class     AuthenticationController {
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;

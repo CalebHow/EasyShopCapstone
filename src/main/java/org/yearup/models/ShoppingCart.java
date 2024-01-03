@@ -1,10 +1,12 @@
 package org.yearup.models;
 
+import org.yearup.data.ShoppingCartDao;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShoppingCart
+public class ShoppingCart implements ShoppingCartDao
 {
     private Map<Integer, ShoppingCartItem> items = new HashMap<>();
 
