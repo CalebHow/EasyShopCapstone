@@ -1,5 +1,6 @@
 package org.yearup.controllers;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,8 +8,7 @@ import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
-import org.apache.commons.dbcp2.BasicDataSource;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,8 @@ import java.util.List;
 // add the annotation to make this controller the endpoint for the following url
     // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
+@CrossOrigin(origins = "http://localhost:8080")
+
 public class CategoriesController
 {
     private CategoryDao categoryDao;
@@ -30,6 +32,7 @@ public class CategoriesController
 
         // find and return all categories
         return null;
+
     }
 
     // add the appropriate annotation for a get action

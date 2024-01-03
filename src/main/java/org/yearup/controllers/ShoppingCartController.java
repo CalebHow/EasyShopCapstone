@@ -14,6 +14,7 @@ import org.yearup.models.User;
 import java.security.Principal;
 
 @RestController
+@CrossOrigin (origins = "http://localhost:8080")
 @RequestMapping("/cart")
 public class ShoppingCartController {
     private ShoppingCartDao shoppingCartDao;
