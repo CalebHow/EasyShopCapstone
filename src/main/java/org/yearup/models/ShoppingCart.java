@@ -1,10 +1,13 @@
 package org.yearup.models;
 
+import org.yearup.data.ShoppingCartDao;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ShoppingCart
+public class ShoppingCart implements ShoppingCartDao
 {
     private Map<Integer, ShoppingCartItem> items = new HashMap<>();
 
@@ -17,7 +20,6 @@ public class ShoppingCart
     {
         this.items = items;
     }
-
     public boolean contains(int productId)
     {
         return items.containsKey(productId);
@@ -43,4 +45,43 @@ public class ShoppingCart
         return total;
     }
 
+    @Override
+    public void createOrUpdate(ShoppingCart shoppingCart) {
+
+    }
+
+    @Override
+    public void addItem(int userId, ShoppingCartItem item) {
+
+    }
+
+    @Override
+    public void updateItemQuantity(int userId, int itemId, int quantity) {
+
+    }
+
+    @Override
+    public void removeItem(int userId, int itemId) {
+
+    }
+
+    @Override
+    public List<ShoppingCartItem> getCartItems(int userId) {
+        return null;
+    }
+
+    @Override
+    public void clearCart(int userId) {
+
+    }
+
+    @Override
+    public double calculateTotalCost(int userId) {
+        return 0;
+    }
+
+    @Override
+    public boolean isCartEmpty(int userId) {
+        return false;
+    }
 }

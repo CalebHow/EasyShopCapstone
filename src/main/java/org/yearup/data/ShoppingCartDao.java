@@ -1,9 +1,30 @@
 package org.yearup.data;
 
+import org.springframework.stereotype.Repository;
 import org.yearup.models.ShoppingCart;
+import org.yearup.models.ShoppingCartItem;
 
-public interface ShoppingCartDao
-{
-    static ShoppingCart getByUserId(int userId);
-    // add additional method signatures here
+import java.util.List;
+@Repository
+public interface ShoppingCartDao {
+
+    static ShoppingCart getByUserId(int userId) {
+        return null;
+    }
+
+    void createOrUpdate(ShoppingCart shoppingCart);
+
+    void addItem(int userId, ShoppingCartItem item);
+
+    void updateItemQuantity(int userId, int itemId, int quantity);
+
+    void removeItem(int userId, int itemId);
+
+    List<ShoppingCartItem> getCartItems(int userId);
+
+    void clearCart(int userId);
+
+    double calculateTotalCost(int userId);
+
+    boolean isCartEmpty(int userId);
 }

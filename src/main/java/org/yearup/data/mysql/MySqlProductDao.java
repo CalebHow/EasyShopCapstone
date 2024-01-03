@@ -1,9 +1,7 @@
 package org.yearup.data.mysql;
-
 import org.springframework.stereotype.Component;
 import org.yearup.models.Product;
 import org.yearup.data.ProductDao;
-
 import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.sql.*;
@@ -16,6 +14,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     public MySqlProductDao(DataSource dataSource)
     {
         super(dataSource);
+    }
+
+    @Override
+    public void add(Product product) {
+
     }
 
     @Override
@@ -40,8 +43,10 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             statement.setInt(2, categoryId);
             statement.setBigDecimal(3, minPrice);
             statement.setBigDecimal(4, minPrice);
-            statement.setString(5, color);
-            statement.setString(6, color);
+            statement.setBigDecimal(5, maxPrice);
+            statement.setBigDecimal(6, maxPrice);
+            statement.setString(7, color);
+            statement.setString(8, color);
 
             ResultSet row = statement.executeQuery();
 
@@ -206,6 +211,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Product> getProductsByCategoryId(int categoryId) {
+        return null;
     }
 
     protected static Product mapRow(ResultSet row) throws SQLException
