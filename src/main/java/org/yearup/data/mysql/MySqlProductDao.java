@@ -19,6 +19,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     }
 
     @Override
+    public void add(Product product) {
+
+    }
+
+    @Override
     public List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color)
     {
         List<Product> products = new ArrayList<>();
@@ -206,6 +211,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Product> getProductsByCategoryId(int categoryId) {
+        return null;
     }
 
     protected static Product mapRow(ResultSet row) throws SQLException
