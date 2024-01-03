@@ -5,10 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
 import org.yearup.controllers.CategoriesController;
+import org.yearup.data.ShoppingCartDao;
 import org.yearup.models.Category;
+import org.yearup.models.ShoppingCart;
+import org.yearup.models.ShoppingCartItem;
 
 @Configuration
+@ComponentScan
+@ComponentScan(basePackages = "org.yearup")
 public class DatabaseConfig
 {
     private BasicDataSource basicDataSource;
@@ -18,6 +24,11 @@ public class DatabaseConfig
     {
         return basicDataSource;
     }
+@Bean
+public ShoppingCartDao shoppingCartDao()
+{
+    return new ShoppingCart();
+}
 
     @Autowired
     public DatabaseConfig(@Value("${datasource.url}") String url,
@@ -34,5 +45,4 @@ public class DatabaseConfig
 
 
     }
-
 }

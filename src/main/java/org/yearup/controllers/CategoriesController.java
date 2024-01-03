@@ -1,11 +1,13 @@
 package org.yearup.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +23,15 @@ public class CategoriesController
 
 
     // create an Autowired controller to inject the categoryDao and ProductDao
-    @Autowired
-    public CategoriesController(CategoryDao categoryDao, ProductDao productDao){
-        this.categoryDao = categoryDao;
-        this.productDao = productDao;
-    }
+
     // add the appropriate annotation for a get action
-        @RequestMapping(path="/categories",method = RequestMethod.GET)
-        public ArrayList<Category> getAll(){
+    public static List<Category> getAllCategories(String CategoryName) {
+        List<String> category = new ArrayList<>();
 
         // find and return all categories
-         return (ArrayList<Category>) categoryDao.getAllCategories();
+        return null;
     }
+
     // add the appropriate annotation for a get action
     public static Category getById(@PathVariable int id)
     {
@@ -46,7 +45,7 @@ public class CategoriesController
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
         // get a list of product by categoryId
-        return productDao.listByCategoryId(categoryId);
+        return null;
     }
 
     // add annotation to call this method for a POST action

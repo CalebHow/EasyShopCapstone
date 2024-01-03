@@ -1,26 +1,30 @@
 package org.yearup.data;
 
-import org.springframework.stereotype.Service;
-import org.yearup.models.ShoppingCart;
-import org.yearup.models.Product;
+import org.springframework.stereotype.Repository;
 import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 
-import java.sql.SQLException;
 import java.util.List;
+@Repository
+public interface ShoppingCartDao {
 
-@Service
-public interface ShoppingCartDao
-{
-    static ShoppingCart getByUserId(int userId) throws SQLException {
+    static ShoppingCart getByUserId(int userId) {
+        return null;
+    }
 
-        // add additional method signatures here
-        ShoppingCart addProductToCart(int userId, int productId);
+    void createOrUpdate(ShoppingCart shoppingCart);
 
-        void clearCart(int userId);
+    void addItem(int userId, ShoppingCartItem item);
 
-        List<Product> getCartItemsByUserId(int userId);
+    void updateItemQuantity(int userId, int itemId, int quantity);
 
-        ShoppingCart updateCartItem(int userId, int productId, ShoppingCartItem shoppingCartItem);
+    void removeItem(int userId, int itemId);
 
+    List<ShoppingCartItem> getCartItems(int userId);
+
+    void clearCart(int userId);
+
+    double calculateTotalCost(int userId);
+
+    boolean isCartEmpty(int userId);
 }
