@@ -1,5 +1,4 @@
 package org.yearup.controllers;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,8 @@ public class ShoppingCartController {
     private ShoppingCartDao shoppingCartDao;
     private UserDao userDao;
     private ProductDao productDao;
+
+
     public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao) {
         this.shoppingCartDao = shoppingCartDao;
         this.userDao = userDao;
@@ -35,8 +36,10 @@ public class ShoppingCartController {
             int userId = user.getId();
             return ShoppingCartDao.getByUserId(userId);
         } catch(Exception e) {
+            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
+
     }
 @Autowired
 public ShoppingCartController(ShoppingCartDao shoppingCartDao){
@@ -60,8 +63,9 @@ public ShoppingCartController(ShoppingCartDao shoppingCartDao){
                 ShoppingCartItem newItem = new ShoppingCartItem();
                 newItem.setProduct(productDao.getById(productId));
                 newItem.setQuantity(1);
-                cart.add(item);
+                cart.add(newItem);
             }
+            shoppingCartDao.save(cart);
         } catch(Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
@@ -76,13 +80,13 @@ public ShoppingCartController(ShoppingCartDao shoppingCartDao){
             ShoppingCart cart = ShoppingCartDao.getByUserId(userId);
             if (cart.contains(productId)) {
                 ShoppingCartItem existingItem = cart.get(productId);
-                existingItem.setQuantity(existingItem.getQuantity() + 1);
+                existingItem.setQuantity(existingItem.getQuantity());
                 cart.add(item);
             } else {
                 item.setProduct(productDao.getById(productId));
-                item.setQuantity(1);
                 cart.add(item);
             }
+            shoppingCartDao.save(cart);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
@@ -97,6 +101,7 @@ public ShoppingCartController(ShoppingCartDao shoppingCartDao){
             int userId = user.getId();
             ShoppingCart cart = ShoppingCartDao.getByUserId(userId);
             cart.getItems().clear();
+            shoppingCartDao.save(cart);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }

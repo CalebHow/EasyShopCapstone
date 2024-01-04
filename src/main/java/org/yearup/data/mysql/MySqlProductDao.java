@@ -1,5 +1,6 @@
 package org.yearup.data.mysql;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.yearup.models.Product;
 import org.yearup.data.ProductDao;
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Configuration
 @Component
 public class MySqlProductDao extends MySqlDaoBase implements ProductDao
 {

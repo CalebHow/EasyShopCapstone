@@ -44,7 +44,6 @@ public class ShoppingCart implements ShoppingCartDao
 
         return total;
     }
-
     @Override
     public void createOrUpdate(ShoppingCart shoppingCart) {
 
@@ -83,5 +82,10 @@ public class ShoppingCart implements ShoppingCartDao
     @Override
     public boolean isCartEmpty(int userId) {
         return false;
+    }
+
+    @Override
+    public void save(ShoppingCart cart) {
+
     }
 }

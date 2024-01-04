@@ -26,4 +26,6 @@ public interface ShoppingCartDao
     double calculateTotalCost(int userId);
 
     boolean isCartEmpty(int userId);
+
+    void save(ShoppingCart cart);
 }
