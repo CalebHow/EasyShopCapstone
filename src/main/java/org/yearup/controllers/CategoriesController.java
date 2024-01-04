@@ -6,8 +6,7 @@ import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.List;
 @RestController
 @RequestMapping("/categories")
@@ -22,11 +21,11 @@ public class CategoriesController {
         this.productDao = productDao;
     }
     @GetMapping
-    public List<Category> getAllCategories() {
+    public List<String> getAllCategories() {
         return categoryDao.getAllCategories();
     }
     @GetMapping("/3")
-    public Category getById(@PathVariable int id) {
+    public int getById(@PathVariable int id) {
         return categoryDao.getById(id);
     }
     @GetMapping("/3/products")
