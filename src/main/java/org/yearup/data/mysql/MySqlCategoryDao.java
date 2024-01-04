@@ -1,14 +1,11 @@
 package org.yearup.data.mysql;
-
 import org.springframework.stereotype.Component;
 import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Component
 public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
 {
@@ -16,16 +13,12 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     {
         super(dataSource);
     }
-
     @Override
     public List<String> getAllCategories()
     {
         List<String> category = new ArrayList<>();
-      ;
-
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category WHERE name = ?")) {
-
 
                 preparedStatement.setString(1, String.valueOf(category));
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -46,11 +39,8 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return category;
     }
-
-
     @Override
     public int getById(int categoryId) {
         try (Connection connection = dataSource.getConnection()) {
@@ -68,21 +58,18 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         }
         return categoryId;
     }
-
     @Override
     public Category create(Category category) {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categories (name, description, category_id) Values (?, ?, ?)")) {
-
                 preparedStatement.setString(1, category.getName());
                 preparedStatement.setString(2, category.getDescription());
-                preparedStatement.setInt(3, (category.getCategoryId()));
                 int affectedRows = preparedStatement.executeUpdate();
-
                 if (affectedRows > 0){
                     try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()){
                         if (generatedKeys.next()){
-
+                            category.setCategoryId(generatedKeys.getInt(1));
+                            return category;
                         }
                     }
                 }
@@ -91,36 +78,45 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
             e.printStackTrace();
 
         }
-        return null;
+        return category;
     }
     @Override
     public void update(int categoryId, Category category)
     {
-        // update category
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories SET name = ?, description = ?, WHERE category_id = ?")){
+                preparedStatement.setString(1, category.getName());
+                preparedStatement.setString(2, category.getDescription());
+                preparedStatement.setInt(3, category.getCategoryId());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     @Override
     public void delete(int categoryId)
     {
-        // delete category
+        try (Connection connection = dataSource.getConnection()){
+            try(PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM categories WHERE category_id = ?")){
+                preparedStatement.setInt(1, categoryId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     private Category mapRow(ResultSet row) throws SQLException
     {
         int categoryId = row.getInt("category_id");
         String name = row.getString("name");
         String description = row.getString("description");
-
         Category category = new Category()
         {{
             setCategoryId(categoryId);
             setName(name);
             setDescription(description);
         }};
-
         return category;
     }
-
-} catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+}
