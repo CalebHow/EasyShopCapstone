@@ -14,26 +14,19 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         super(dataSource);
     }
     @Override
-    public List<String> getAllCategories()
+    public List<Category> getAllCategories()
     {
-        List<String> category = new ArrayList<>();
+        List<Category> category = new ArrayList<>();
         try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category WHERE name = ?")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM categories")) {
 
-                preparedStatement.setString(1, String.valueOf(category));
                 ResultSet resultSet = preparedStatement.executeQuery();
-
                 while (resultSet.next()) {
-                    int categoryId = resultSet.getInt("category_id");
-                    String description = resultSet.getString("description");
-                    String name = resultSet.getString("name");
-                    String fullCategoryInfo = categoryId + " " + name + " " + description;
-                    category.add(fullCategoryInfo);
-
-                    for (String categoryI: category )
-                    {
-                        System.out.println(categoryI);
-                    }
+                    Category category1 = new Category(
+                            resultSet.getInt("category_id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("description"));
+                    category.add(category1);
                 }
             }
         } catch (SQLException e) {

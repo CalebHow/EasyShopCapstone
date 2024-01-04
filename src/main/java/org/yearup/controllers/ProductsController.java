@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("products")
-@CrossOrigin (origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:63342")
 public class ProductsController
 {
     private ProductDao productDao;

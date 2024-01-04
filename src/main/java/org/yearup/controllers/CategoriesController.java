@@ -10,7 +10,7 @@ import org.yearup.models.Product;
 import java.util.List;
 @RestController
 @RequestMapping("/categories")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:63342")
 public class CategoriesController {
     private final CategoryDao categoryDao;
     private final ProductDao productDao;
@@ -21,7 +21,7 @@ public class CategoriesController {
         this.productDao = productDao;
     }
     @GetMapping
-    public List<String> getAllCategories() {
+    public List<Category> getAllCategories() {
         return categoryDao.getAllCategories();
     }
     @GetMapping("/{id}")
