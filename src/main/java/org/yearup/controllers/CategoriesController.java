@@ -24,11 +24,11 @@ public class CategoriesController {
     public List<String> getAllCategories() {
         return categoryDao.getAllCategories();
     }
-    @GetMapping("/3")
+    @GetMapping("/{id}")
     public int getById(@PathVariable int id) {
         return categoryDao.getById(id);
     }
-    @GetMapping("/3/products")
+    @GetMapping("/{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId) {
         return productDao.getProductsByCategoryId(categoryId);
     }
@@ -37,12 +37,12 @@ public class CategoriesController {
     public Category addCategory(@RequestBody Category category) {
         return categoryDao.create(category);
     }
-    @PutMapping("/3")
+    @PutMapping("/{id}")
     @Secured("ROLE_ADMIN")
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         categoryDao.update(id, category);
     }
-    @DeleteMapping("/3")
+    @DeleteMapping("/{id}")
     @Secured("ROLE_ADMIN")
     public void deleteCategory(@PathVariable int id) {
         categoryDao.delete(id);
