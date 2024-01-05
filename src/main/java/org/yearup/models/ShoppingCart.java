@@ -5,14 +5,13 @@ import org.yearup.data.ShoppingCartDao;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ShoppingCart implements ShoppingCartDao
+public class ShoppingCart
 {
     private Map<Integer, ShoppingCartItem> items = new HashMap<>();
 
-    public ShoppingCart() {
-    }
 
     public Map<Integer, ShoppingCartItem> getItems()
     {
@@ -46,26 +45,4 @@ public class ShoppingCart implements ShoppingCartDao
                                 .reduce( BigDecimal.ZERO, (lineTotal, subTotal) -> subTotal.add(lineTotal));
 
         return total;
-    }
-//Methods down below from the implementation
-    @Override
-    public ShoppingCart getByUserId(int userId) throws SQLException {
-        return null;
-    }
-    @Override
-    public ShoppingCart addProductToCart(int productId, int userId) {
-        return null;
-    }
-    @Override
-    public ShoppingCart updateCartItem(int userId, int productId, ShoppingCartItem shoppingCartItem) {
-        return null;
-    }
-
-    @Override
-    public void saveCart(ShoppingCart cart) {
-    }
-
-    @Override
-    public void clearCart(int userId) {
-    }
-}
+    }}

@@ -43,7 +43,7 @@ public class ShoppingCartController {
         }
         return null;
     }
-    @PostMapping("cart/products/{productId}")
+    @PostMapping("/cart/products/{productId}")
     public ShoppingCart addProductToCart(@PathVariable int productId, Principal principal)
     {
         try {
@@ -70,7 +70,7 @@ public class ShoppingCartController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... your bad >=).");
         }
     }
-    @PutMapping("cart/products/{productId}")
+    @PutMapping("/cart/products/{productId}")
     public ShoppingCart updateProductInCart(@PathVariable int productId, @RequestBody ShoppingCartItem item, Principal principal) {
         try {
             if (principal == null) {
@@ -90,7 +90,7 @@ public class ShoppingCartController {
                 }
                 return shoppingCartDao.addProductToCart(userId, productId);
             } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... your bad.");
             }
         } catch (ResponseStatusException e) {
             throw new RuntimeException(e);

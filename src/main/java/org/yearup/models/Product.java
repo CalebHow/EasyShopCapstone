@@ -30,7 +30,6 @@ public class Product
         this.isFeatured = isFeatured;
         this.imageUrl = imageUrl;
     }
-
     public int getProductId()
     {
         return productId;

@@ -11,4 +11,6 @@ public interface ShoppingCartDao{
     ShoppingCart updateCartItem(int userId, int productId, ShoppingCartItem shoppingCartItem);
     void saveCart(ShoppingCart cart);
     void clearCart(int userId);
+
+    void executeAndUpdate(String query, Object... params);
 }

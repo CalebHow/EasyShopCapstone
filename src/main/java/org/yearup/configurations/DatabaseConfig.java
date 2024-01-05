@@ -24,11 +24,7 @@ public class DatabaseConfig
     {
         return basicDataSource;
     }
-@Bean
-public ShoppingCartDao shoppingCartDao()
-{
-    return new ShoppingCart();
-}
+
 
     @Autowired
     public DatabaseConfig(@Value("${datasource.url}") String url,

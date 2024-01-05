@@ -1,6 +1,7 @@
 package org.yearup.data.mysql;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.yearup.models.Profile;
 import org.yearup.data.ProfileDao;
 
