@@ -10,16 +10,22 @@ import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 import org.yearup.models.User;
 import java.security.Principal;
-@RestController
+
 @CrossOrigin(origins = "http://localhost:63342")
-@RequestMapping("/cart")
+@RestController
 public class ShoppingCartController {
+@Autowired
+    private final ShoppingCartDao shoppingCartDao;
+@Autowired
+    private final UserDao userDao;
+@Autowired
+    private final ProductDao productDao;
     @Autowired
-    private ShoppingCartDao shoppingCartDao;
-    @Autowired
-    private UserDao userDao;
-    @Autowired
-    private ProductDao productDao;
+    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao) {
+        this.shoppingCartDao = shoppingCartDao;
+        this.userDao = userDao;
+        this.productDao = productDao;
+    }
     @GetMapping ("/cart")
     //^ I FOUND THE PATHING ERROR!!!!!
     public ShoppingCart getCart(Principal principal) {
@@ -59,14 +65,13 @@ public class ShoppingCartController {
                 newItem.setQuantity(1);
                 cart.add(newItem);
             }
-            shoppingCartDao.saveCart(cart);
+            return shoppingCartDao.addProductToCart(userId, productId);
         } catch(Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... your bad >=).");
         }
-        return null;
     }
     @PutMapping("cart/products/{productId}")
-    public void updateProductInCart(@PathVariable int productId, @RequestBody ShoppingCartItem item, Principal principal) {
+    public ShoppingCart updateProductInCart(@PathVariable int productId, @RequestBody ShoppingCartItem item, Principal principal) {
         try {
             if (principal == null) {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "BEGONE! GET THEE BEHIND ME SATAN!");
@@ -83,7 +88,7 @@ public class ShoppingCartController {
                     item.setProduct(productDao.getById(productId));
                     cart.add(item);
                 }
-                shoppingCartDao.saveCart(cart);
+                return shoppingCartDao.addProductToCart(userId, productId);
             } catch (Exception e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
             }
@@ -102,7 +107,7 @@ public class ShoppingCartController {
             int userId = user.getId();
             ShoppingCart cart = shoppingCartDao.getByUserId(userId);
             cart.getItems().clear();
-            shoppingCartDao.saveCart(cart);
+            shoppingCartDao.clearCart(userId);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
