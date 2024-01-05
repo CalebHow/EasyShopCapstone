@@ -1,5 +1,7 @@
 #EasyShop Capstone Project Update
+
 (Programmed by Christian Crites, Caleb Howard, and Darrien Connor)
+
 #Phase 1: CategoriesController
 
 In the first phase of our EasyShop Capstone project, significant progress has been made with the implementation of the CategoriesController. This controller now features robust methods for handling Create, Read, Update, and Delete (CRUD) operations. It is essential to note that access to these operations is restricted to the administrator role. As a result, only administrators have the privilege to insert, update, and delete categories within the system.
