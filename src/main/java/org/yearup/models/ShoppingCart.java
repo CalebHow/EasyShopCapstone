@@ -3,6 +3,7 @@ package org.yearup.models;
 import org.yearup.data.ShoppingCartDao;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,48 +45,25 @@ public class ShoppingCart implements ShoppingCartDao
 
         return total;
     }
+//Methods down below from the implementation
     @Override
-    public void createOrUpdate(ShoppingCart shoppingCart) {
-
+    public ShoppingCart getByUserId(int userId) throws SQLException {
+        return null;
     }
-
     @Override
-    public void addItem(int userId, ShoppingCartItem item) {
-
+    public ShoppingCart addProductToCart(int productId, int userId) {
+        return null;
     }
-
     @Override
-    public void updateItemQuantity(int userId, int itemId, int quantity) {
-
-    }
-
-    @Override
-    public void removeItem(int userId, int itemId) {
-
-    }
-
-    @Override
-    public List<ShoppingCartItem> getCartItems(int userId) {
+    public ShoppingCart updateCartItem(int userId, int productId, ShoppingCartItem shoppingCartItem) {
         return null;
     }
 
     @Override
+    public void saveCart(ShoppingCart cart) {
+    }
+
+    @Override
     public void clearCart(int userId) {
-
-    }
-
-    @Override
-    public double calculateTotalCost(int userId) {
-        return 0;
-    }
-
-    @Override
-    public boolean isCartEmpty(int userId) {
-        return false;
-    }
-
-    @Override
-    public void save(ShoppingCart cart) {
-
     }
 }
