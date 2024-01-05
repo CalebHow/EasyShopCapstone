@@ -44,7 +44,7 @@ public class ShoppingCartController {
         return null;
     }
     @PostMapping("cart/products/{productId}")
-    public ShoppingCart addProductToCart(@PathVariable int productId,ShoppingCartItem item, Principal principal)
+    public ShoppingCart addProductToCart(@PathVariable int productId, Principal principal)
     {
         try {
             String userName = principal.getName();

@@ -5,12 +5,14 @@ import org.yearup.data.ShoppingCartDao;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart implements ShoppingCartDao
 {
     private Map<Integer, ShoppingCartItem> items = new HashMap<>();
+
+    public ShoppingCart() {
+    }
 
     public Map<Integer, ShoppingCartItem> getItems()
     {
