@@ -32,7 +32,7 @@ public class CategoriesController {
     public List<Product> getProductsById(@PathVariable int categoryId) {
         return productDao.getProductsByCategoryId(categoryId);
     }
-    @PostMapping
+    @RequestMapping(path="/categories",method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public Category addCategory(@RequestBody Category category) {
         return categoryDao.create(category);
