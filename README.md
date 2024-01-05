@@ -2,9 +2,20 @@
 
 (Programmed by Christian Crites, Caleb Howard, and Darrien Connor)
 
+#FrameworkTechs
+Java: The language of our program.
+Spring Boot: Framework used for building and executing Java applications.
+MySQL: Database used for data storage.
+Maven: Build automation tool and dependency management for Java-based projects.
+JUnit: The framework for testing our Java application.
+RESTful API: The chosen style for designing networked applications.
+
 #Phase 1: CategoriesController
 
 In the first phase of our EasyShop Capstone project, significant progress has been made with the implementation of the CategoriesController. This controller now features robust methods for handling Create, Read, Update, and Delete (CRUD) operations. It is essential to note that access to these operations is restricted to the administrator role. As a result, only administrators have the privilege to insert, update, and delete categories within the system.
+
+#Phase 2: Debugging
+We managed to debug many of the problems inherent in the program. This was a time consuming process but we did manage to fix the original bugs. This included fixing the filtering and search functions on the EasyShop website, finding and removing a bug that duplicated products in the store inventory, and fixing the Login function. allowing a user to login to our website.
 
 
 #Phase 2: ProductsController
