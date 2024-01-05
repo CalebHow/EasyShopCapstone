@@ -26,7 +26,7 @@ public class ShoppingCartController {
         this.userDao = userDao;
         this.productDao = productDao;
     }
-    @GetMapping ("/cart")
+    @GetMapping ("/shopping_cart")
     //^ I FOUND THE PATHING ERROR!!!!!
     public ShoppingCart getCart(Principal principal) {
         try {
@@ -43,7 +43,11 @@ public class ShoppingCartController {
         }
         return null;
     }
+<<<<<<< HEAD
     @PostMapping("/cart/products/{productId}")
+=======
+    @PostMapping("shopping_cart/products/{productId}")
+>>>>>>> 14e46b971aeb8395638144ac27a7ecf08c5543da
     public ShoppingCart addProductToCart(@PathVariable int productId, Principal principal)
     {
         try {
@@ -70,7 +74,11 @@ public class ShoppingCartController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... your bad >=).");
         }
     }
+<<<<<<< HEAD
     @PutMapping("/cart/products/{productId}")
+=======
+    @PutMapping("shopping_cart/products/{productId}")
+>>>>>>> 14e46b971aeb8395638144ac27a7ecf08c5543da
     public ShoppingCart updateProductInCart(@PathVariable int productId, @RequestBody ShoppingCartItem item, Principal principal) {
         try {
             if (principal == null) {
@@ -96,7 +104,7 @@ public class ShoppingCartController {
             throw new RuntimeException(e);
         }
     }
-    @DeleteMapping("/cart")
+    @DeleteMapping("/shopping_cart")
     public void clearCart(Principal principal) {
         if (principal == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't exist.");

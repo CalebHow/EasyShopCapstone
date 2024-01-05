@@ -11,14 +11,14 @@ import java.security.Principal;
 @CrossOrigin(origins = "http://localhost:63342")
 @RequestMapping("/profile")
 public class ProfileController {
-@Autowired
+    @Autowired
     private final ProfileDao profileDao;
     @Autowired
     public ProfileController(ProfileDao profileDao) {
         this.profileDao = profileDao;
     }
 
-    @GetMapping ("/profile")
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public Profile getProfile(Principal principal) {
         try {
             if (principal != null) {

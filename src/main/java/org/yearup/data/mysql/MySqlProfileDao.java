@@ -38,6 +38,12 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Profile getProfile(String name) {
+        return null;
+    }
+
     @Override
     public Profile getByUserId(String userId) {
         String sql = "SELECT * FROM profiles WHERE user_id = ?";
@@ -47,13 +53,13 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
             throw new RuntimeException("Failed to retrieve profile by user ID", e);
         }
     }@Override
-    public Profile update(String userId, Profile profile) {
+    public Profile update(String userName, Profile profile) {
         String sql = "UPDATE profiles SET first_name = ?, last_name = ?, phone = ?, email = ?, " +
-                "address = ?, city = ?, state = ?, zip = ? WHERE user_id = ?";
+                "address = ?, city = ?, state = ?, zip = ? WHERE userName = ?";
         try {
             jdbcTemplate.update(sql, profile.getFirstName(), profile.getLastName(), profile.getPhone(),
                     profile.getEmail(), profile.getAddress(), profile.getCity(), profile.getState(),
-                    profile.getZip(), userId);
+                    profile.getZip(), userName);
         } catch (Exception e) {
             throw new RuntimeException("Failed to update profile", e);
         }
@@ -63,7 +69,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
         @Override
         public Profile mapRow(ResultSet rs, int rowNum) throws SQLException {
             Profile profile = new Profile();
-            profile.setUserId(Integer.parseInt(rs.getString("user_id")));
+            profile.setUserId(Integer.parseInt(rs.getString("userName")));
             profile.setFirstName(rs.getString("first_name"));
             profile.setLastName(rs.getString("last_name"));
             profile.setPhone(rs.getString("phone"));
