@@ -3,12 +3,19 @@
 (Programmed by Christian Crites, Caleb Howard, and Darrien Connor)
 
 #FrameworkTechs
+
 Java: The language of our program.
+
 Spring Boot: Framework used for building and executing Java applications.
+
 MySQL: Database used for data storage.
+
 Maven: Build automation tool and dependency management for Java-based projects.
+
 JUnit: The framework for testing our Java application.
+
 RESTful API: The chosen style for designing networked applications.
+
 
 #Phase 1: CategoriesController
 
